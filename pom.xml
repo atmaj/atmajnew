@@ -1,0 +1,613 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>Restructuring</groupId>
+	<artifactId>UXPAutomation</artifactId>
+	<version>1</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<surefire.fork.count>4</surefire.fork.count>
+		<cucumber.run.parallel>SCENARIO</cucumber.run.parallel>
+		<cucumber.tags>@ACCOUNTS</cucumber.tags>
+
+		<cucumber.version>4.8.1</cucumber.version>
+		<selenium.version>3.141.59</selenium.version>
+		<appium.version>6.0.0</appium.version>
+		<apache.poi>4.1.2</apache.poi>
+		<aspectj.version>1.8.10</aspectj.version>
+		<assertj-core-version>3.19.0</assertj-core-version>
+		<restassured.version>4.2.0</restassured.version>
+		<jjwt.version>0.11.2</jjwt.version>
+		<bouncycastle.version>1.69</bouncycastle.version>
+		<jdbc-connector-mssql>9.4.0.jre8</jdbc-connector-mssql>
+		<jdbc-mssql-auth-dll>9.4.0.x64</jdbc-mssql-auth-dll>
+<!-- 		<dllPath>${settings.localRepository}\com\microsoft\sqlserver\mssql-jdbc_auth\${jdbc-mssql-auth-dll}\</dllPath> -->
+		<dllPath>${project.build.directory}/test-classes/dll/</dllPath>
+	</properties>
+	<profiles>
+		<profile>
+			<id>ParallelExecution</id>
+			<build>
+				<plugins>
+				<plugin>
+						<groupId>com.trivago.rta</groupId>
+						<artifactId>cluecumber-report-plugin</artifactId>
+						<version>2.7.0</version>
+						<executions>
+							<execution>
+								<id>report</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>reporting</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<customPageTitle>Cucumber Execution Report</customPageTitle>
+							<startPage>ALL_SCENARIOS</startPage>
+							<sourceJsonReportDirectory>${project.build.directory}/cucumber-parallel</sourceJsonReportDirectory>
+							<generatedHtmlReportDirectory>${project.build.directory}/html-report</generatedHtmlReportDirectory>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<version>3.1.0</version>
+						<executions>
+							<execution>
+								<phase>initialize</phase>
+								<goals>
+									<goal>clean</goal>
+								</goals>
+								<configuration>
+									<filesets>
+										<fileset>
+											<directory>src/test/resources/FinalFeatures/UXP_Banking_365</directory>
+											<includes>
+												<include>**/*</include>
+											</includes>
+											<followSymlinks>false</followSymlinks>
+										</fileset>
+									</filesets>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>3.0.0</version>
+						<executions>
+							<execution>
+								<id>pre-run-steps</id>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>java</goal>
+								</goals>
+								<configuration>
+									<classpathScope>test</classpathScope>
+									<mainClass>com.boi.grp.utilities.PreRunUtility</mainClass>
+								</configuration>
+							</execution>
+							<execution>
+								<id>post-run-steps</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>java</goal>
+								</goals>
+								<configuration>
+									<systemProperties>
+										<systemProperty>
+											<key>mavenLocalRepo</key>
+											<value>${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar</value>
+										</systemProperty>
+									</systemProperties>
+									<classpathScope>test</classpathScope>
+									<mainClass>com.boi.grp.utilities.PostRunUtility</mainClass>
+								</configuration>
+							</execution>
+						</executions>
+
+					</plugin>
+					<plugin>
+						<groupId>com.github.temyers</groupId>
+						<artifactId>cucumber-jvm-parallel-plugin</artifactId>
+						<version>5.0.0</version>
+						<executions>
+							<execution>
+								<id>generateRunners</id>
+								<phase>generate-test-sources</phase>
+								<goals>
+									<goal>generateRunners</goal>
+								</goals>
+								<configuration>
+									<glue>
+										<package>com.boi</package>
+									</glue>
+									<!-- These are optional, with the default values -->
+									<!-- Where to output the generated tests -->
+									<outputDirectory>${project.build.directory}/generated-test-sources/cucumber</outputDirectory>
+									<!-- The directory, which must be in the root of the runtime classpath, 
+										containing your feature files. -->
+									<featuresDirectory>src/test/resources/FinalFeatures/UXP_Banking_365</featuresDirectory>
+									<!-- Directory where the cucumber report files shall be written -->
+									<cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir>
+									<!-- List of cucumber plugins. When none are provided the json formatter 
+										is used. For more advanced usage see section about configuring cucumber plugins -->
+									<plugins>
+										<plugin>
+											<name>pretty</name>
+										</plugin>
+										<plugin>
+											<name>json</name>
+										</plugin>
+										<plugin>
+											<name>junit</name>
+										</plugin>
+										<plugin>
+											<name>html</name>
+											<extension>html</extension>
+										</plugin>
+										<plugin>
+											<name>io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm</name>
+											<noOutput>true</noOutput>
+										</plugin>
+										<plugin>
+											<name>rerun</name>
+										</plugin>
+									</plugins>
+									<!-- CucumberOptions.strict property -->
+									<strict>true</strict>
+									<!-- CucumberOptions.monochrome property -->
+									<monochrome>true</monochrome>
+									<tags>
+										<tag>${cucumber.tags}</tag>
+										<!-- <tag>~@billing</tag> -->
+										<!-- <tag>@important</tag> -->
+										<!-- <tag>@important,@billing</tag> -->
+									</tags>
+									<!-- Generate TestNG runners instead of JUnit ones. -->
+									<useTestNG>false</useTestNG>
+									<!-- The naming scheme to use for the generated test classes. One 
+										of ['simple', 'feature-title', 'pattern'] -->
+									<namingScheme>feature-title</namingScheme>
+									<!-- The class naming pattern to use. Only required/used if naming 
+										scheme is 'pattern'. -->
+									<namingPattern>Parallel{c}IT</namingPattern>
+									<!-- One of [SCENARIO, FEATURE]. SCENARIO generates one runner per 
+										scenario. FEATURE generates a runner per feature. -->
+									<parallelScheme>${cucumber.run.parallel}</parallelScheme>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.22.0</version>
+<configuration>
+							<!--<argLine>-Xmx6144M</argLine> -->
+							<skip>false</skip>
+							<forkCount>${surefire.fork.count}</forkCount>
+							<reuseForks>false</reuseForks>
+							<includes>
+								<include>**/*IT.class</include>
+							</includes>
+							<testFailureIgnore>true</testFailureIgnore>
+							<!--<argLine>-Djava.library.path=${dllPath}</argLine> -->
+							<systemPropertyVariables>
+								<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+							</systemPropertyVariables>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>org.aspectj</groupId>
+								<artifactId>aspectjweaver</artifactId>
+								<version>${aspectj.version}</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+		<dependencies>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-core</artifactId>
+			<version>${cucumber.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>${cucumber.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-picocontainer</artifactId>
+			<version>${cucumber.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-jvm-deps</artifactId>
+			<version>1.0.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.edge</groupId>
+			<artifactId>msedge-selenium-tools-java</artifactId>
+			<version>3.141.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>29.0-jre</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>4.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>${appium.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>ooxml-schemas</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${apache.poi}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${apache.poi}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>${apache.poi}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc_auth</artifactId>
+			<version>${jdbc-mssql-auth-dll}</version>
+			<type>dll</type>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>${jdbc-connector-mssql}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.teradata</groupId>
+			<artifactId>tdgssconfig</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.teradata</groupId>
+			<artifactId>terajdbc4</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbutils</groupId>
+			<artifactId>commons-dbutils</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-csv</artifactId>
+			<version>2.12.3</version>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.jayway.restassured</groupId> -->
+		<!-- <artifactId>rest-assured</artifactId> -->
+		<!-- <version>2.4.1</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.jayway.jsonpath</groupId> -->
+		<!-- <artifactId>json-path</artifactId> -->
+		<!-- <version>2.5.0</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>${restassured.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${restassured.version}</version>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.jayway.restassured</groupId> -->
+		<!-- <artifactId>rest-assured</artifactId> -->
+		<!-- <version>2.4.1</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.jayway.jsonpath</groupId> -->
+		<!-- <artifactId>json-path</artifactId> -->
+		<!-- <version>2.5.0</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-gson</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>${bouncycastle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>${bouncycastle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.jayway.restassured</groupId> -->
+		<!-- <artifactId>rest-assured</artifactId> -->
+		<!-- <version>2.4.1</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.jayway.jsonpath</groupId> -->
+		<!-- <artifactId>json-path</artifactId> -->
+		<!-- <version>2.5.0</version> -->
+		<!-- </dependency> -->
+		<dependency>
+
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-cucumber4-jvm</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-generator</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-model</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-plugin-api</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+		
+<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports-cucumber4-adapter</artifactId>
+			<version>1.2.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.testng</groupId>
+					<artifactId>testng</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>net.masterthought</groupId>
+			<artifactId>cucumber-reporting</artifactId>
+			<version>5.3.1</version>
+
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-gson</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>${bouncycastle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>${bouncycastle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-cucumber4-jvm</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-generator</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-model</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-plugin-api</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+
+<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports-cucumber4-adapter</artifactId>
+			<version>1.2.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.testng</groupId>
+					<artifactId>testng</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>net.masterthought</groupId>
+			<artifactId>cucumber-reporting</artifactId>
+			<version>5.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock-jre8</artifactId>
+			<version>2.27.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock-jre8-standalone</artifactId>
+			<version>2.27.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20200518</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.rcarz</groupId>
+			<artifactId>jira-client</artifactId>
+			<version>0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${assertj-core-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.httprpc</groupId>
+			<artifactId>httprpc-client</artifactId>
+			<version>8.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>pl.pragmatists</groupId>
+			<artifactId>JUnitParams</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.boi</groupId>
+			<artifactId>crypt</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/test/resources/crypt-util/Crypter.jar</systemPath>
+		</dependency>
+		<dependency>
+        <groupId>nl.garvelink.oss</groupId>
+        <artifactId>iban</artifactId>
+        <version>1.9.0</version>
+    </dependency> 
+	</dependencies>
+</project>
