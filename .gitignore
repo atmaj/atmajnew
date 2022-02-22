@@ -1,0 +1,8 @@
+**/*.logs
+*.orig
+**/*.orig
+target/
+pom.xml
+runners/
+report.properties
+**/*.log
