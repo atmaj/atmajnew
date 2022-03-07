@@ -1,1136 +1,1327 @@
-ENVIRONMENT=SITA7
-DESKTOP_URL=
-MOBILE_URL=
-#MOBILE_URL=
-RESULT_BACKUP=NA
-EXPLICITWAIT=15
-IMPLICITWAIT=5
-PACKAGENAME=
-#DEVICETYPE=Web
-WINDOWSIZE=1920,1080
-CHROME_VERSION=version90
-REPORT_TYPE=ALL
-EXCEL_CONFIGURATION=FALSE
-#EXCEL_CONFIGURATION_FILEPATH=\\resources\\testData\\Configuration.xlsx
-EXCEL_CONFIGURATION_FILEPATH=resources
-#TEST_DATA_FILEPATH=C:\\Devesh\\git-code\\uxp-test-automation\\Base-UXP\\src\\test\\resources\\testData\\AllScenarioTestData.xlsx
-#TEST_DATA_FILEPATH=C:\\All softwares\\P1
-TEST_DATA_FILEPATH=resources
-PICK_CODE_FROM_ENGAGE_HUB=TRUE
-DEVICE_NICKNAME=
-#For A6 HID_URI=https://172.27.33.107:9082
-
-#HID_URI=
-#HID_KEYSTORE=
-#HID_KEYSTORE_PASSPHRASE=
-#HID_TRUSTSTORE=
-#HID_TRUSTSTORE_PASSPHRASE=
-
-#CONSOLIDATEDREPORT,ALL,DEFAULT
-
-# The below section is the predicted parameters required for test execution on WINDOWS MACHINE - START
-
-#       PLATFORM=WINDOWS
-#       TYPE=BROWSER
-#PREFERRED_BROWSER=HEADLESSCHROME
-#     PREFERRED_BROWSER=Chrome
-#      PREFERRED_BROWSER=Edge
-
-
-# The above section is the predicted parameters required for test execution on LOCAL MACHINE - END
-
-# The below section is the predicted parameters required for test execution on Browserstack Generic Data - START,
-
-        PROXYHOST=
-        PROXYPORT=
-        BROWSERSTACKHOST=http://hub.browserstack.com/wd/hub
-        BROWSERSTACKHOSTUSER=
-        BROWSERSTACKPASSWORD=
-        PLATFORM=BROWSERSTACK
-        PROJECTNAME=P1_UXP
-        BUILD=test23A7
-        NAME=AUTOMATED P1Runs
-
-# The below section is the predicted parameters required for test execution on Browserstack Generic Data - END
-
-# The below section is the predicted parameters required for test execution on Browserstack Browser- START
-
-## use for browser
-#		TYPE=BROWSER
-#		PREFERRED_BROWSER=Firefox
-#		VERSION=95
-#		BROWSERSTACKOS=WINDOWS
-#		BROWSERSTACKOSVERSION=11
-#		RESOLUTION=2048x1536
-#		LOCAL=false
-
-# use for Mobile browser
-#		TYPE=MOBILEBROWSER
-#		PREFERRED_BROWSER=Chrome
-#		#VERSION=92.0
-#		DEVICEPLATFORM=ANDROID
-#		DEVICENAME=Samsung Galaxy Tab S3
-#		DEVICEOSVERSION=8.0
-#		RESOLUTION=2048x1536
-#		LOCAL=false
-# The above section is the predicted parameters required for test execution on Browserstack Browser - END
-
-# The below section is the predicted parameters required for test execution on BrowserStack Mobile App(ANDROID or IOS) - START
-#
-#        TYPE=APPLICATION
-##        DEVICEPLATFORM=IOS
-##        DEVICENAME=iPhone 12
-##		DEVICEOSVERSION=14
-#		APP=bs://
-
-#########################################################################################
-
-        TYPE=APPLICATION
-		DEVICEPLATFORM=ANDROID
-        DEVICENAME=Samsung Galaxy S9 Plus
-		DEVICEOSVERSION=9
-        APP=bs://
-		RESOLUTION=2048x1536
-		LOCAL=false
-		APPPACKAGENAME=
-
-# The below section is the predicted parameters required for test execution on BrowserStack Mobile App(Android/IOS) - End
-
-# The below section is the predicted parameters required for test execution on BrowserStack Mobile Browser(ANDROID or IOS) - START
-#
-#        TYPE=MOBILEBROWSER
-#        DEVICEPLATFORM=IOS
-#        DEVICENAME=iPad Pro 12.9 2020
-#        DEVICEOSVERSION=14
-#        PREFERRED_BROWSER=SAFARI
-#        RESOLUTION=2048x1536
-#        LOCAL=false
+package com.boi.grp.utilities.Jira;
+
+public class JiraEntity {
+
+    private static String jiraUpdate = System.getProperty("JIRA.UPDATE");
+    private static String JIRA_URL = System.getProperty("JIRA_URL");
+    private static String JIRA_USERNAME = System.getProperty("JIRA_USERNAME");
+    private static String JIRA_PASSWORD = System.getProperty("JIRA_PASSWORD");
+    private static String jiraInputFormat = System.getProperty("JIRA.INPUT_FORMAT");
+    private static String jiraInputLocation = System.getProperty("JIRA.INPUT_LOCATION");
+    private static String HEADER_AO7DEABF = "";//JiraZephyrTestCaseManagement.getJiraCustomHeader("AO-7DEABF");
+
+    private static String jiraProject = System.getProperty("JIRA.PROJECT_NAME");
+    private static String jiraCycleName = System.getProperty("JIRA.CYCLE_NAME");
+    private static String jiraFolderName = System.getProperty("JIRA.FOLDER_NAME");
+    private static String jiraVersion = System.getProperty("JIRA.VERSION");
+    private static String jiraReportType = System.getProperty("JIRA.REPORT_TYPE");
+    private static String jiraReportsDir = System.getProperty("JIRA.REPORTS_DIR");
+    private static String jiraBuildNumber = System.getProperty("JIRA.BUILD_NUMBER");
+    private static int jiraThreadsCount = Integer.parseInt(System.getProperty("JIRA.THREADS_COUNT", "1"));
+
+    public String getJiraUpdate() {
+        return jiraUpdate;
+    }
+
+    public String getJiraUrl() {
+        return JIRA_URL;
+    }
+
+    public String getJiraUsername() {
+        return JIRA_USERNAME;
+    }
+
+    public String getJiraPassword() {
+        return JIRA_PASSWORD;
+    }
+
+    public static String getJiraInputFormat() {
+        return jiraInputFormat;
+    }
+
+    public static String getJiraInputLocation() {
+        return jiraInputLocation;
+    }
+
+    public static String getHeaderAo7deabf() {
+        return HEADER_AO7DEABF;
+    }
+
+    public static void setJiraUpdate(String jiraUpdate) {
+        JiraEntity.jiraUpdate = jiraUpdate;
+    }
+
+    public static void setJiraUrl(String jiraUrl) {
+        JIRA_URL = jiraUrl;
+    }
+
+    public static void setJiraUsername(String jiraUsername) {
+        JIRA_USERNAME = jiraUsername;
+    }
+
+    public static void setJiraPassword(String jiraPassword) {
+        JIRA_PASSWORD = jiraPassword;
+    }
+
+    public static void setJiraInputFormat(String jiraInputFormat) {
+        JiraEntity.jiraInputFormat = jiraInputFormat;
+    }
+
+    public static void setJiraInputLocation(String jiraInputLocation) {
+        JiraEntity.jiraInputLocation = jiraInputLocation;
+    }
+
+    public static void setHeaderAo7deabf(String headerAo7deabf) {
+        HEADER_AO7DEABF = headerAo7deabf;
+    }
+
+    public static String getJiraProject() {
+        return jiraProject;
+    }
+
+    public static void setJiraProject(String jiraProject) {
+        JiraEntity.jiraProject = jiraProject;
+    }
+
+    public static String getJiraCycleName() {
+        return jiraCycleName;
+    }
+
+    public static void setJiraCycleName(String jiraCycleName) {
+        JiraEntity.jiraCycleName = jiraCycleName;
+    }
+
+    public static String getJiraFolderName() {
+        return jiraFolderName;
+    }
+
+    public static void setJiraFolderName(String jiraFolderName) {
+        JiraEntity.jiraFolderName = jiraFolderName;
+    }
+
+    public static String getJiraVersion() {
+        return jiraVersion;
+    }
 
-# The below section is the predicted parameters required for test execution on BrowserStack Mobile App(Android/IOS) - End
+    public static void setJiraVersion(String jiraVersion) {
+        JiraEntity.jiraVersion = jiraVersion;
+    }
 
-# The below section is the predicted parameters required for test execution on MOBILECENTER Generic Data - START
-##
-#        MOBILECENTERHOST=
-#        MOBILECENTERUSER=
-#        MOBILECENTERPASSWORD=
+    public static String getJiraReportsDir() {
+        return jiraReportsDir;
+    }
 
-# The below section is the predicted parameters required for test execution on MOBILECENTER Generic Data - END
+    public static void setJiraReportsDir(String jiraReportsDir) {
+        JiraEntity.jiraReportsDir = jiraReportsDir;
+    }
 
+    public static String getJiraBuildNumber() {
+        return jiraBuildNumber;
+    }
 
-# The below section is the predicted parameters required for test execution on MOBILECENTER ANDROID - START
-#        PLATFORM=MOBILECENTER
-#        TYPE=APPLICATION
-#        DEVICEPLATFORM=ANDROID
-#        UDID=
-#        DEVICENAME=samsung SM-G960F
-#        #APPPACKAGENAME=com.bankofireland.tcmb
-#        APPPACKAGENAME=com.bankofireland.boiinapp
-#        APPACTIVITYNAME=com.temenos.edgehybrid.EdgeActivity
+    public static void setJiraBuildNumber(String jiraBuildNumber) {
+        JiraEntity.jiraBuildNumber = jiraBuildNumber;
+    }
 
+    public static String getJiraReportType() {
+        return jiraReportType;
+    }
 
-# The below section is the predicted parameters required for test execution on MOBILECENTER ANDROID - End
+    public static void setJiraReportType(String jiraReportType) {
+        JiraEntity.jiraReportType = jiraReportType;
+    }
 
+    public static int getJiraThreadsCount() {
+        return jiraThreadsCount;
+    }
 
-# The below section is the predicted parameters required for test execution on MOBILECENTER IOS - START
-
-#        PLATFORM=MOBILECENTER
-#        TYPE=APPLICATION
-#        DEVICEPLATFORM=IOS
-#        DEVICENAME=MC iPhoneX v14
-#        VERSION=14.8
-#        UDID=
-#        IOSBUNDLEID=
-
-# The below section is the predicted parameters required for test execution on MOBILECENTER IOS - End
-
-
-# The below section is the predicted parameters required for test execution on MOBILECENTER Web ANDROID - START
-#        PLATFORM=MOBILECENTER
-#        TYPE=BROWSER
-#        PREFERRED_BROWSER=Chrome
-#        DEVICEPLATFORM=ANDROID
-#        UDID=R9WR10C41DJ
-#        DEVICENAME=SM-T505
-
-# The below section is the predicted parameters required for test execution on MOBILECENTER Web ANDROID - End
-
-
-# The below section is the predicted parameters required for test execution on MOBILECENTER Web Ios - START
-#
-#        PLATFORM=MOBILECENTER
-#        TYPE=BROWSER
-#        PREFERRED_BROWSER=Safari
-#        DEVICEPLATFORM=IOS
-#        DEVICENAME=Apple iPhone XS Max
-#        IOSBUNDLEID=com.bankofireland.tcmb
-#        UDID=8b45cb1d97834d69ceaa0ac7947f36a611d255d2
-
-
-# The below section is the predicted parameters required for test execution on MOBILECENTER Web Ios - End
-
-# The below section is the predicted parameters required for test execution on WINDOWS ANDROID - START
-
-#        PLATFORM=WINDOWS
-#        TYPE=APPLICATION
-#        DEVICEPLATFORM=ANDROID
-#        UDID=
-#        DEVICENAME=samsung SM-G960F
-#        VERSION=8.0.0
-#        APPPACKAGENAME=
-#        APPACTIVITYNAME=
-#        APPIUMURL=http://0.0.0.0:4723/wd/hub
-
-# The below section is the predicted parameters required for test execution on WINDOWS ANDROID - End
-
-
-# The below section is the predicted parameters required for test execution on Mac IOS - START
-
-#        PLATFORM=MAC
-#        TYPE=APPLICATION
-#        DEVICEPLATFORM=IOS
-#        UDID=
-#        VERSION=12.1.2
-#        DEVICENAME=Apple Apple iPhone XS Max
-#        IOSBUNDLEID=
-#        APPIUMURL=http://0.0.0.0:4723/wd/hub
-
-# The below section is the predicted parameters required for test execution on Mac IOS - End
-
-
-# The below section is the predicted parameters required for test execution on WINDOWS Device Browser - START
-
-#        PLATFORM=WINDOWS
-#        TYPE=MOBILEBROWSER
-#        DEVICEPLATFORM=ANDROID
-#        PREFERRED_BROWSER=Chrome
-#        UDID=
-#        DEVICENAME=samsung SM-G960F
-#        VERSION=8.0.0
-#        DRIVEREXECUTABLEPATH=C:\\Users\\C112083\\AppData\\Local\\Programs\\Appium\\resources\\app\\node_modules\\appium-chromedriver\\chromedriver\\win\\chromedriver.exe
-#        APPIUMURL=http://0.0.0.0:4723/wd/hub
-
-# The below section is the predicted parameters required for test execution on WINDOWS Device Browser - End
-
-
-# The below section is the predicted parameters required for test execution on Mac Device Browser - START
-
-#        PLATFORM=MAC
-#        TYPE=MOBILEBROWSER
-#        DEVICEPLATFORM=IOS
-#        PREFERRED_BROWSER=Safari
-#        UDID=
-#        VERSION=12.1.2
-#        DEVICENAME=Apple Apple iPhone XS Max
-#        APPIUMURL=http://0.0.0.0:4723/wd/hub
-
-# The below section is the predicted parameters required for test execution on Mac Device Browser - End
-
-
-# The below section is the predicted parameters required for test execution on WINDOWS API - START
-##
-#        PLATFORM=WINDOWS
-#       TYPE=API
-#        URI=http://localhost:8077
-#        NAME=/rest/v2/name/DATATOBEREPLACED
-#        ISMOCKINGENABLED=TRUE
-
-# The below section is the predicted parameters required for test execution on WINDOWS API - End
-
-
-# The below section is the predicted parameters required for test execution on WINDOWS Database - START
-
-#        PLATFORM=WINDOWS
-#        TYPE=DATABASE
-
-# The below section is the predicted parameters required for test execution on WINDOWS Database - End
-
-# The below section is the predicted parameters required for test execution on Selenium GRID - START
-
-#        PLATFORM=GRID
-#        TYPE=BROWSER
-#        PREFERRED_BROWSER=IE
-#       HUBURL=http://localhost:4444/wd/hub
-
-# The above section is the predicted parameters required for test execution on Selenium GRID - END
-
-# The below section is the predicted parameters required for test execution on Database - START
-#       PLATFORM=WINDOWS
-#		TYPE=DATABASE
-#		PROJECT.NAME=
-#		BUILD.NUMBER=
-#		DB.CONNECTION.RETRY.THRESHOLD=0
-#		DB.CONNECTION.RECOVERYTIME.THRESHOLD=5
-#		DATABASE.ENVIRONMENT=
-#		DATABASE.SQL.QUERY.REPOSITORY=resources/SQL_Queries
-#		DB.HOST=
-#		DB.ATTACH.QUERYRESULT=FALSE
-#		RESULTSET.DIR.TEMP=target/tempResults
-#		RESULTSET.DIR=target/queryResults
-#		DB.USERNAME=
-#		DB.PASSWORD=
-#		UPDATE_FEATURE_OVERVIEW=YES/NO
-# The below section is the predicted parameters required for test execution on Database - END
-
-
-# The below section is the predicted parameters required for test execution on API - START
-#       PLATFORM=WINDOWS
-#		TYPE=API
-#		PROJECT.NAME=
-#		BUILD.NUMBER=1
-#		SSL_CONFIGURED=NO
-#		##SSL MODE CAN BE JKS or P12 or PKCS based on the type of files being used. FOR JKS Update KeyStore and TrustStore details. For P12 or PKCS, update PCKS details
-#		SSL_HANDSHAKE_KEYSTORE_TYPE=P12
-#		KEYSTORE_JKS_FILE=
-#		KEYSTORE_PASSWORD=
-#		TRUSTSTORE_JKS_FILE=
-#		TRUSTSTORE_PASSWORD=
-#		PKCS_FILE=
-#		PKCS_PASSWORD=
-#		UPDATE_FEATURE_OVERVIEW=YES/NO
-# The below section is the predicted parameters required for test execution on API - END
-
-
-&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
-{
-	"en_IE": {
-		"eir_map": {
-			"A41": [
-				{
-					"city": "BALLYBOUGHAL",
-					"county": "Dublin"
-				}
-			],
-			"A42": [
-				{
-					"city": "GARRISTOWN",
-					"county": "Dublin"
-				}
-			],
-			"A45": [
-				{
-					"city": "OLDTOWN",
-					"county": "Dublin"
-				}
-			],
-			"A63": [
-				{
-					"city": "GREYSTONES",
-					"county": "Wicklow"
-				}
-			],
-			"A67": [
-				{
-					"city": "WICKLOW",
-					"county": "Wicklow"
-				}
-			],
-			"A75": [
-				{
-					"city": "CASTLEBLAYNEY",
-					"county": "Monaghan"
-				}
-			],
-			"A81": [
-				{
-					"city": "CARRICKMACROSS",
-					"county": "Monaghan"
-				}
-			],
-			"A82": [
-				{
-					"city": "KELLS",
-					"county": "Meath"
-				}
-			],
-			"A83": [
-				{
-					"city": "ENFIELD",
-					"county": "Meath"
-				}
-			],
-			"A84": [
-				{
-					"city": "ASHBOURNE",
-					"county": "Meath"
-				}
-			],
-			"A85": [
-				{
-					"city": "DUNSHAUGHLIN",
-					"county": "Meath"
-				}
-			],
-			"A86": [
-				{
-					"city": "DUNBOYNE",
-					"county": "Meath"
-				}
-			],
-			"A91": [
-				{
-					"city": "DUNDALK",
-					"county": "Louth"
-				}
-			],
-			"A92": [
-				{
-					"city": "DROGHEDA",
-					"county": "Louth"
-				}
-			],
-			"A94": [
-				{
-					"city": "BLACKROCK",
-					"county": "Dublin"
-				}
-			],
-			"A96": [
-				{
-					"city": "GLENAGEARY",
-					"county": "Dublin"
-				}
-			],
-			"A98": [
-				{
-					"city": "BRAY",
-					"county": "Wicklow"
-				}
-			],
-			"C15": [
-				{
-					"city": "NAVAN",
-					"county": "Meath"
-				}
-			],
-			"D01": [
-				{
-					"city": "DUBLIN 1",
-					"county": "Dublin"
-				}
-			],
-			"D02": [
-				{
-					"city": "DUBLIN 2",
-					"county": "Dublin"
-				}
-			],
-			"D03": [
-				{
-					"city": "DUBLIN 3",
-					"county": "Dublin"
-				}
-			],
-			"D04": [
-				{
-					"city": "DUBLIN 4",
-					"county": "Dublin"
-				}
-			],
-			"D05": [
-				{
-					"city": "DUBLIN 5",
-					"county": "Dublin"
-				}
-			],
-			"D06": [
-				{
-					"city": "DUBLIN 6",
-					"county": "Dublin"
-				}
-			],
-			"D07": [
-				{
-					"city": "DUBLIN 7",
-					"county": "Dublin"
-				}
-			],
-			"D08": [
-				{
-					"city": "DUBLIN 8",
-					"county": "Dublin"
-				}
-			],
-			"D09": [
-				{
-					"city": "DUBLIN 9",
-					"county": "Dublin"
-				}
-			],
-			"D10": [
-				{
-					"city": "DUBLIN 10",
-					"county": "Dublin"
-				}
-			],
-			"D11": [
-				{
-					"city": "DUBLIN 11",
-					"county": "Dublin"
-				}
-			],
-			"D12": [
-				{
-					"city": "DUBLIN 12",
-					"county": "Dublin"
-				}
-			],
-			"D13": [
-				{
-					"city": "DUBLIN 13",
-					"county": "Dublin"
-				}
-			],
-			"D14": [
-				{
-					"city": "DUBLIN 14",
-					"county": "Dublin"
-				}
-			],
-			"D15": [
-				{
-					"city": "DUBLIN 15",
-					"county": "Dublin"
-				}
-			],
-			"D16": [
-				{
-					"city": "DUBLIN 16",
-					"county": "Dublin"
-				}
-			],
-			"D17": [
-				{
-					"city": "DUBLIN 17",
-					"county": "Dublin"
-				}
-			],
-			"D18": [
-				{
-					"city": "DUBLIN 18",
-					"county": "Dublin"
-				}
-			],
-			"D20": [
-				{
-					"city": "DUBLIN 20",
-					"county": "Dublin"
-				}
-			],
-			"D22": [
-				{
-					"city": "DUBLIN 22",
-					"county": "Dublin"
-				}
-			],
-			"D24": [
-				{
-					"city": "DUBLIN 24",
-					"county": "Dublin"
-				}
-			],
-			"D6W": [
-				{
-					"city": "DUBLIN 6W",
-					"county": "Dublin"
-				}
-			],
-			"E21": [
-				{
-					"city": "CAHIR",
-					"county": "Tipperary"
-				}
-			],
-			"E25": [
-				{
-					"city": "CASHEL",
-					"county": "Tipperary"
-				}
-			],
-			"E32": [
-				{
-					"city": "CARRICK-ON-SUIR",
-					"county": "Tipperary"
-				}
-			],
-			"E34": [
-				{
-					"city": "TIPPERARY",
-					"county": "Tipperary"
-				}
-			],
-			"E41": [
-				{
-					"city": "THURLES",
-					"county": "Tipperary"
-				}
-			],
-			"E45": [
-				{
-					"city": "NENAGH",
-					"county": "Tipperary"
-				}
-			],
-			"E53": [
-				{
-					"city": "ROSCREA",
-					"county": "Tipperary"
-				}
-			],
-			"E91": [
-				{
-					"city": "CLONMEL",
-					"county": "Tipperary"
-				}
-			],
-			"F12": [
-				{
-					"city": "CLAREMORRIS",
-					"county": "Mayo"
-				}
-			],
-			"F23": [
-				{
-					"city": "CASTLEBAR",
-					"county": "Mayo"
-				}
-			],
-			"F26": [
-				{
-					"city": "BALLINA",
-					"county": "Mayo"
-				}
-			],
-			"F28": [
-				{
-					"city": "WESTPORT",
-					"county": "Mayo"
-				}
-			],
-			"F31": [
-				{
-					"city": "BALLINROBE",
-					"county": "Mayo"
-				}
-			],
-			"F35": [
-				{
-					"city": "BALLYHAUNIS",
-					"county": "Mayo"
-				}
-			],
-			"F42": [
-				{
-					"city": "ROSCOMMON",
-					"county": "Roscommon"
-				}
-			],
-			"F45": [
-				{
-					"city": "CASTLEREA",
-					"county": "Roscommon"
-				}
-			],
-			"F52": [
-				{
-					"city": "BOYLE",
-					"county": "Roscommon"
-				}
-			],
-			"F56": [
-				{
-					"city": "BALLYMOTE",
-					"county": "Sligo"
-				}
-			],
-			"F91": [
-				{
-					"city": "SLIGO",
-					"county": "Sligo"
-				}
-			],
-			"F92": [
-				{
-					"city": "LETTERKENNY",
-					"county": "Donegal"
-				}
-			],
-			"F93": [
-				{
-					"city": "LIFFORD",
-					"county": "Donegal"
-				}
-			],
-			"F94": [
-				{
-					"city": "DONEGAL",
-					"county": "Donegal"
-				}
-			],
-			"H12": [
-				{
-					"city": "CAVAN",
-					"county": "Cavan"
-				}
-			],
-			"H14": [
-				{
-					"city": "BELTURBET",
-					"county": "Cavan"
-				}
-			],
-			"H16": [
-				{
-					"city": "COOTEHILL",
-					"county": "Cavan"
-				}
-			],
-			"H18": [
-				{
-					"city": "MONAGHAN",
-					"county": "Monaghan"
-				}
-			],
-			"H23": [
-				{
-					"city": "CLONES",
-					"county": "Monaghan"
-				}
-			],
-			"H53": [
-				{
-					"city": "BALLINASLOE",
-					"county": "Galway"
-				}
-			],
-			"H54": [
-				{
-					"city": "TUAM",
-					"county": "Galway"
-				}
-			],
-			"H62": [
-				{
-					"city": "LOUGHREA",
-					"county": "Galway"
-				}
-			],
-			"H65": [
-				{
-					"city": "ATHENRY",
-					"county": "Galway"
-				}
-			],
-			"H71": [
-				{
-					"city": "CLIFDEN",
-					"county": "Galway"
-				}
-			],
-			"H91": [
-				{
-					"city": "GALWAY",
-					"county": "Galway"
-				}
-			],
-			"K32": [
-				{
-					"city": "BALBRIGGAN",
-					"county": "Dublin"
-				}
-			],
-			"K34": [
-				{
-					"city": "SKERRIES",
-					"county": "Dublin"
-				}
-			],
-			"K36": [
-				{
-					"city": "MALAHIDE",
-					"county": "Dublin"
-				}
-			],
-			"K45": [
-				{
-					"city": "LUSK",
-					"county": "Dublin"
-				}
-			],
-			"K56": [
-				{
-					"city": "RUSH",
-					"county": "Dublin"
-				}
-			],
-			"K67": [
-				{
-					"city": "SWORDS",
-					"county": "Dublin"
-				}
-			],
-			"K78": [
-				{
-					"city": "LUCAN",
-					"county": "Dublin"
-				}
-			],
-			"N37": [
-				{
-					"city": "ATHLONE",
-					"county": "Westmeath"
-				}
-			],
-			"N39": [
-				{
-					"city": "LONGFORD",
-					"county": "Longford"
-				}
-			],
-			"N41": [
-				{
-					"city": "CARRICK-ON-SHANNON",
-					"county": "Leitrim"
-				}
-			],
-			"N91": [
-				{
-					"city": "MULLINGAR",
-					"county": "Westmeath"
-				}
-			],
-			"P12": [
-				{
-					"city": "MACROOM",
-					"county": "Cork"
-				}
-			],
-			"P14": [
-				{
-					"city": "CORK - CROOKSTOWN",
-					"county": "Cork"
-				}
-			],
-			"P17": [
-				{
-					"city": "KINSALE",
-					"county": "Cork"
-				}
-			],
-			"P24": [
-				{
-					"city": "COBH",
-					"county": "Cork"
-				}
-			],
-			"P25": [
-				{
-					"city": "MIDLETON",
-					"county": "Cork"
-				}
-			],
-			"P31": [
-				{
-					"city": "BALLINCOLLIG",
-					"county": "Cork"
-				}
-			],
-			"P32": [
-				{
-					"city": "CORK - DONOUGHMORE",
-					"county": "Cork"
-				}
-			],
-			"P36": [
-				{
-					"city": "YOUGHAL",
-					"county": "Cork"
-				}
-			],
-			"P43": [
-				{
-					"city": "CARRIGALINE",
-					"county": "Cork"
-				}
-			],
-			"P47": [
-				{
-					"city": "CORK - DUNMANWAY",
-					"county": "Cork"
-				}
-			],
-			"P51": [
-				{
-					"city": "MALLOW",
-					"county": "Cork"
-				}
-			],
-			"P56": [
-				{
-					"city": "CHARLEVILLE",
-					"county": "Cork"
-				}
-			],
-			"P61": [
-				{
-					"city": "FERMOY",
-					"county": "Cork"
-				}
-			],
-			"P67": [
-				{
-					"city": "MITCHELSTOWN",
-					"county": "Cork"
-				}
-			],
-			"P72": [
-				{
-					"city": "BANDON",
-					"county": "Cork"
-				}
-			],
-			"P75": [
-				{
-					"city": "BANTRY",
-					"county": "Cork"
-				}
-			],
-			"P81": [
-				{
-					"city": "SKIBBEREEN",
-					"county": "Cork"
-				}
-			],
-			"P85": [
-				{
-					"city": "CLONAKILTY",
-					"county": "Cork"
-				}
-			],
-			"R14": [
-				{
-					"city": "ATHY",
-					"county": "Kildare"
-				}
-			],
-			"R21": [
-				{
-					"city": "MUINE BHEAG",
-					"county": "Carlow"
-				}
-			],
-			"R32": [
-				{
-					"city": "PORTLAOISE",
-					"county": "Laois"
-				}
-			],
-			"R35": [
-				{
-					"city": "TULLAMORE",
-					"county": "Offaly"
-				}
-			],
-			"R42": [
-				{
-					"city": "BIRR",
-					"county": "Offaly"
-				}
-			],
-			"R45": [
-				{
-					"city": "EDENDERRY",
-					"county": "Offaly"
-				}
-			],
-			"R51": [
-				{
-					"city": "KILDARE",
-					"county": "Kildare"
-				}
-			],
-			"R56": [
-				{
-					"city": "CURRAGH",
-					"county": "Kildare"
-				}
-			],
-			"R93": [
-				{
-					"city": "CARLOW",
-					"county": "Carlow"
-				}
-			],
-			"R95": [
-				{
-					"city": "KILKENNY",
-					"county": "Kilkenny"
-				}
-			],
-			"T12": [
-				{
-					"city": "CORK - BALLINHASSIG",
-					"county": "Cork"
-				}
-			],
-			"T23": [
-				{
-					"city": "CORK - BLARNEY",
-					"county": "Cork"
-				}
-			],
-			"T34": [
-				{
-					"city": "CORK - WHITECHURCH",
-					"county": "Cork"
-				}
-			],
-			"T45": [
-				{
-					"city": "LITTLE ISLAND",
-					"county": "Cork"
-				}
-			],
-			"T56": [
-				{
-					"city": "CORK - WATERGRASSHILL",
-					"county": "Cork"
-				}
-			],
-			"V14": [
-				{
-					"city": "SHANNON",
-					"county": "Clare"
-				}
-			],
-			"V15": [
-				{
-					"city": "KILRUSH",
-					"county": "Clare"
-				}
-			],
-			"V23": [
-				{
-					"city": "CAHERCIVEEN",
-					"county": "Kerry"
-				}
-			],
-			"V31": [
-				{
-					"city": "LISTOWEL",
-					"county": "Kerry"
-				}
-			],
-			"V35": [
-				{
-					"city": "KILMALLOCK",
-					"county": "Limerick"
-				}
-			],
-			"V42": [
-				{
-					"city": "NEWCASTLE WEST",
-					"county": "Limerick"
-				}
-			],
-			"V92": [
-				{
-					"city": "TRALEE",
-					"county": "Kerry"
-				}
-			],
-			"V93": [
-				{
-					"city": "KILLARNEY",
-					"county": "Kerry"
-				}
-			],
-			"V94": [
-				{
-					"city": "LIMERICK",
-					"county": "Limerick"
-				}
-			],
-			"V95": [
-				{
-					"city": "ENNIS",
-					"county": "Clare"
-				}
-			],
-			"W12": [
-				{
-					"city": "NEWBRIDGE",
-					"county": "Kildare"
-				}
-			],
-			"W23": [
-				{
-					"city": "MAYNOOTH",
-					"county": "Kildare"
-				}
-			],
-			"W34": [
-				{
-					"city": "MONASTEREVIN",
-					"county": "Kildare"
-				}
-			],
-			"W91": [
-				{
-					"city": "NAAS",
-					"county": "Kildare"
-				}
-			],
-			"X35": [
-				{
-					"city": "DUNGARVAN",
-					"county": "Waterford"
-				}
-			],
-			"X42": [
-				{
-					"city": "KILMACTHOMAS",
-					"county": "Waterford"
-				}
-			],
-			"X91": [
-				{
-					"city": "WATERFORD",
-					"county": "Waterford"
-				}
-			],
-			"Y14": [
-				{
-					"city": "ARKLOW",
-					"county": "Wicklow"
-				}
-			],
-			"Y21": [
-				{
-					"city": "ENNISCORTHY",
-					"county": "Wexford"
-				}
-			],
-			"Y25": [
-				{
-					"city": "GOREY",
-					"county": "Wexford"
-				}
-			],
-			"Y34": [
-				{
-					"city": "NEW ROSS",
-					"county": "Wexford"
-				}
-			],
-			"Y35": [
-				{
-					"city": "WEXFORD",
-					"county": "Wexford"
-				}
-			]
-		},
-		"phoneNumber": "(\\+353|0|00353)(83|85|86|87|88|89)\\d{7}",
-		"eir_code": "A(4[125]|6[37]|75|8[1-6]|9[12468])|C15|D(0[1-9]|1[0-8]|2[024]|6W)|E([24][15]|3[24]|53|91)|F(12|2[368]|3[15]|4[25]|5[26]|9[1-4])|H(1[2468]|23|5[34]|6[25]|71|91)|K(3[246]|45|56|67|78)|N(3[79]|41|91)|P(1[247]|2[45]|3[126]|4[37]|5[16]|6[17]|7[25]|8[15])|R(14|21|[34][25]|5[16]|9[35])|T(12|23|34|45|56)|V(1[45]|23|3[15]|42|9[2-5])|W(12|23|34|91)|X(35|42|91)|Y(14|2[15]|3[45])"
-	}
+    public static void setJiraThreadsCount(int jiraThreadsCount) {
+        JiraEntity.jiraThreadsCount = jiraThreadsCount;
+    }
 }
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+package com.boi.grp.utilities.Jira;
+
+import com.boi.grp.utilities.LogManager;
+import org.apache.commons.collections4.list.TreeList;
+import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static com.boi.grp.hooks.Hooks.testscenario;
+
+public class JiraUtil {
+
+    private static JiraEntity jiraEntity = new JiraEntity();
+    private static final Logger LOG = LogManager.getInstance();
+
+    public static LinkedHashMap<String, LinkedHashMap> moveJiraListToMap(List<LinkedHashMap<String, String>> list) {
+        LinkedHashMap<String, LinkedHashMap> jiraCycleMap = new LinkedHashMap<>();
+
+        for(LinkedHashMap<String, String> map : list){
+            map.put("PROJECT_ID", "");
+            map.put("VERSION_ID", "");
+            map.put("CYCLE_ID", "");
+            map.put("FOLDER_ID", "");
+            map.put("EXECUTION_ID", "");
+            jiraCycleMap.put(map.get("TESTCASE_NAME"), map);
+        }
+        return jiraCycleMap;
+    }
+
+    public static LinkedHashMap<String, LinkedHashMap> updateJiraCycleMap(LinkedHashMap<String, LinkedHashMap> jiraCycleMap) {
+
+        for( Map.Entry<String,LinkedHashMap> entry : jiraCycleMap.entrySet()){
+            String key = entry.getKey();
+            LinkedHashMap value = entry.getValue();
+            value.put("PROJECT_NAME", jiraEntity.getJiraProject());
+            value.put("CYCLE_NAME", jiraEntity.getJiraCycleName());
+            value.put("VERSION", jiraEntity.getJiraVersion());
+            value.put("FOLDER_NAME", jiraEntity.getJiraFolderName());
+            jiraCycleMap.put(key, value);
+        }
+        return jiraCycleMap;
+    }
+
+    private static LinkedHashMap addNonEmptyValuesIntoMap(LinkedHashMap map, String key, String value) {
+        if(!value.equals("") && null != value){
+            map.put(key, value);
+        }
+        return map;
+    }
+
+    public static LinkedHashMap<String, LinkedHashMap> jiraJsonObjectToMap(String jiraMasterJson) {
+        LinkedHashMap<String, LinkedHashMap> jiraCycleMap = new LinkedHashMap<>();
+        JSONObject jsonObj = new JSONObject(jiraMasterJson);
+        JSONArray jsonArray = jsonObj.getJSONArray("Jira");
+
+        for (int i = 0, size = jsonArray.length(); i < size; i++)
+        {
+            LinkedHashMap tempMap = new LinkedHashMap();
+            JSONObject objectInArray = jsonArray.getJSONObject(i);
+            String[] elementNames = JSONObject.getNames(objectInArray);
+            for (String elementName : elementNames) {
+                tempMap.put(elementName, objectInArray.getString(elementName));
+            }
+            tempMap.put("PROJECT_ID", "");
+            tempMap.put("VERSION_ID", "");
+            tempMap.put("CYCLE_ID", "");
+            tempMap.put("FOLDER_ID", "");
+            tempMap.put("EXECUTION_ID", "");
+            jiraCycleMap.put(objectInArray.getString("TESTCASE_NAME"), tempMap);
+        }
+
+        return jiraCycleMap;
+    }
+
+    public static String readTheFileFromAbsPath(String fileName){
+        String message = "";
+        try {
+            BufferedReader reader;
+            reader = new BufferedReader(new FileReader(fileName.toString()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                message = message + line + "\n";
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error: "+ e);
+        }
+        return message;
+    }
+
+    public static List<LinkedHashMap<String, String>> readAllLinesInDataSheet(String SheetName) {
+        List<LinkedHashMap<String, String>> getDataList = new TreeList<>();
+        List<LinkedHashMap<String, String>> finalList = new TreeList<>();
+        ArrayList<LinkedHashMap<String, String>> data = new ArrayList<>();
+
+        String fileLocations = new File(jiraEntity.getJiraInputLocation()).getAbsoluteFile().toString();
+        String value;
+        int startRow = 1;
+        int test = 0;
+        int dataMapCounter = 0;
+        try {
+            File file = new File(fileLocations + "/" +SheetName + ".xlsx");
+            FileInputStream inputStream = new FileInputStream(file);
+            Workbook workbook = new XSSFWorkbook(inputStream);
+            Sheet sheet = workbook.getSheet("data");
+
+            for (int row = 1; row <= sheet.getLastRowNum(); row++) {
+                LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+                LinkedHashMap<String, String> dataMap1 = new LinkedHashMap<>();
+
+                String getKeyName = sheet.getRow(row).getCell(0).toString();
+
+                for (int col = 0; col < sheet.getRow(0).getLastCellNum(); col++) {
+                    String key = sheet.getRow(0).getCell(col).toString();
+                    try {
+                        Cell cell = sheet.getRow(row).getCell(col);
+                        cell.setCellType(CellType.STRING);
+                        value = sheet.getRow(row).getCell(col).toString().replaceAll("\n", "").trim();
+                        value = replaceSpaceAndTabs(value);
+                    } catch (Exception e) {
+                        value = "";
+                    }
+
+                    dataMap.put(key, value);
+                }
+
+                getDataList.add(dataMapCounter, dataMap);
+                startRow = row + 1;
+                data.add(dataMapCounter++, dataMap1);
+                test = test + 1;
+            }
+
+            finalList.add(getDataList.get(0));
+            for (int row = startRow; row <= sheet.getLastRowNum(); row++) {
+                LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+
+                String getKeyName = sheet.getRow(row).getCell(0).toString();
+                if (Objects.equals(getKeyName, "")) {
+                    for (int col = 0; col < sheet.getRow(0).getLastCellNum(); col++) {
+                        String key = sheet.getRow(0).getCell(col).toString();
+                        try {
+                            Cell cell = sheet.getRow(row).getCell(col);
+                            cell.setCellType(CellType.STRING);
+                            value = sheet.getRow(row).getCell(col).toString().trim();
+                            value = replaceSpaceAndTabs(value);
+                        } catch (Exception e) {
+                            value = "";
+                        }
+
+                        dataMap.put(key, value);
+
+                    }
+                    getDataList.add(dataMapCounter, dataMap);
+                    test = test + 1;
+                } else {
+                    break;
+                }
+            }
+            getDataList.remove(0);
+            Collections.reverse(getDataList);
+
+            finalList.addAll(getDataList);
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            return null;
+        }
+
+        return finalList;
+    }
+
+    public static String replaceSpaceAndTabs(String inString) {
+        int takeNum;
+        for (int j = 0; j < inString.length(); j++) {
+            if (inString.contains("SPACE>") || (inString.contains("TAB>"))) {
+                int spacePosition = inString.indexOf("SPACE>");
+                int tabPosition = inString.indexOf("TAB>");
+                if (spacePosition < 0) {
+                    spacePosition = tabPosition + tabPosition;
+                } else if (tabPosition < 0) {
+                    tabPosition = spacePosition + spacePosition;
+                }
+                if (spacePosition < tabPosition) {
+                    String shortString = inString.substring(0, spacePosition);
+                    String startString = shortString.substring(shortString.lastIndexOf("<")).replaceFirst("<", "");
+                    takeNum = Integer.parseInt(startString);
+                    String replaceSpace = "<" + takeNum + "SPACE>";
+                    String spaces = String.format("%1$-" + takeNum + "s", "");
+                    inString = inString.replaceAll(replaceSpace, spaces);
+                } else {
+                    String shortString = inString.substring(0, tabPosition);
+                    String startString = shortString.substring(shortString.lastIndexOf("<")).replaceFirst("<", "");
+                    takeNum = Integer.parseInt(startString);
+                    String replaceTab = "<" + takeNum + "TAB>";
+                    String tabs = "";
+                    for (int num = 1; num <= takeNum; num++) {
+                        tabs = tabs + "\t";
+                    }
+                    inString = inString.replaceAll(replaceTab, tabs);
+                }
+            } else {
+                break;
+            }
+        }
+
+        inString = inString.replaceAll("<CARRIAGERETURN>", "\r");
+        inString = inString.replaceAll("<NEWLINE>", "\n");
+        return inString;
+    }
+
+    public static LinkedHashMap<String, LinkedHashMap<String, Object>> parseOverallStatusForScenarioOutline(List<LinkedHashMap<String, Object>> consolidatedExecutionResult){
+
+        LinkedHashMap<String, LinkedHashMap<String, Object>> mainData = new LinkedHashMap<String, LinkedHashMap<String, Object>>();
+        try {
+            for (LinkedHashMap<String,Object> tempMap:consolidatedExecutionResult) {
+                if(mainData.containsKey(tempMap.get("Scenario"))){
+                    LinkedHashMap<String, Object> newMap = mainData.get(tempMap.get("Scenario"));
+                    if(tempMap.get("Status").equals(2)){
+                        if (!newMap.get("Status").equals(2)) {
+                            newMap.put("Status",tempMap.get("Status"));
+                            newMap.put("failedCause",tempMap.get("failedCause"));
+                        }else{
+                            //mega suggestion
+                            newMap.put("failedCause",newMap.get("failedCause")+"\n"+tempMap.get("failedCause"));
+                        }
+                    }
+                    mainData.put((String)tempMap.get("Scenario"),newMap);
+                }else{
+                    mainData.put((String)tempMap.get("Scenario"),tempMap);
+                }
+            }
+        } catch (Throwable e) {
+            LOG.error("Method: parseOverallStatusForScenarioOutline - Error Response: " + e.getMessage());
+        }
+        return mainData;
+    }
+
+    public static List<LinkedHashMap<String, Object>> deserializeExecutionData(){
+        List<LinkedHashMap<String, Object>> executionResultsNew = new ArrayList<>();
+        try{
+            File file=new File(System.getProperty("user.dir")+"/target/jira");
+            File[] arr = file.listFiles();
+            assert arr != null;
+            for (File tempFile:arr) {
+                LinkedHashMap<String, Object> map;
+                String path = tempFile.getAbsolutePath();
+                FileInputStream fis = new FileInputStream(path);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                map = (LinkedHashMap<String, Object>) ois.readObject();
+                executionResultsNew.add(map);
+                ois.close();
+                fis.close();
+            }
+        } catch (Exception e){
+            LOG.error("Method: deserializeExecutionData - Error Response: "+e.getMessage());
+        }
+        return executionResultsNew;
+    }
+
+    public static String nameOfTheFile(String path){
+        String completeName = null;
+        try {
+            File file =new File(path);
+            if(!file.isFile()){
+                if(!file.isDirectory()){
+                    file.mkdir();
+                }
+                String[] scenarioId = testscenario.getId().split(":");
+                String finalId = scenarioId[scenarioId.length - 1];
+                String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+                completeName = "executionResult_" + timeStamp + "_"+finalId;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return completeName;
+    }
+
+    public static void serializeScenarioData(String name,LinkedHashMap<String, Object> scenarioResult){
+        try{
+            FileOutputStream fos = new FileOutputStream(System.getProperty("user.dir")+"/target/jira/"+name);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(scenarioResult);
+            oos.close();
+            fos.close();
+            //System.out.println("Serialisation complete for execution result, name = "+name);
+        }
+        catch (Exception ioe){
+            LOG.error("Error in serialization of execution data, Error = "+ioe.getMessage());
+        }
+    }
+}
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+package com.boi.grp.utilities.Jira;
+
+import com.boi.grp.utilities.LogManager;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import sun.misc.BASE64Encoder;
+
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class JiraZephyrTestCaseManagement {
+
+    private static final Logger LOG = LogManager.getInstance();
+
+    private static LinkedHashMap<String, LinkedHashMap> jiraCycleMap = new LinkedHashMap<>();
+    public static LinkedHashMap<String, String> jiraProjectIDMap = new LinkedHashMap<>();
+    public static LinkedHashMap<String, String> jiraversionIDMap = new LinkedHashMap<>();
+    public static LinkedHashMap cyclesList = new LinkedHashMap<>();
+    public static LinkedHashMap<String, String> cyclePresenceMap = new LinkedHashMap<>();
+    public static LinkedHashMap<String, String> folderPresenceMap = new LinkedHashMap<>();
+    public static  List<HashMap<String, Object>> executionResults;
+
+    private static JiraEntity jiraEntity = new JiraEntity();
+    public static void main(String args[]){
+        /*jiraEntity.setJiraUrl("https://jira.boigroup.net/");
+        jiraEntity.setJiraUsername("");
+        jiraEntity.setJiraPassword("");
+        jiraEntity.setHeaderAo7deabf("SVCKPQubXYVrYssfeih5UrUMbLCoeBwuMxWG12O/LSceMp4R82bp8nfloiAS6mSW9xv9mhOEwgTTjunCO17uYw==");
+        jiraEntity.setJiraUpdate("false");
+
+        cyclesList.put("TESTCASE_NAME","IT2_SIT_OUT_Camt.029_MT196_TS01_TC01");
+        cyclesList.put("PROJECT_NAME","TASFE");
+        cyclesList.put("CYCLE_NAME","Test Cycle 1");
+        cyclesList.put("FOLDER_NAME","Test Folder 4");
+        cyclesList.put("VERSION","POC for updating Jira");
+        cyclesList.put("TESTCASE_KEY","TASFE-18");
+        jiraCycleMap.put("IT2_SIT_OUT_Camt.029_MT196_TS01_TC01", cyclesList);
+
+
+        String projectId = "33401", versionId="32007", cycleName="Test Cycle 1", cycleId="", folderName="Test Folder 4", folderId="", issueKey="TASFE-18", testcaseName="IT2_SIT_OUT_Camt.029_MT196_TS01_TC01";
+
+        cycleId = createTestCycles(cycleName, projectId, versionId);
+        folderId = createNewFolderIntoTestCycles(folderName, projectId, versionId, cycleId);
+        String execId = addTestsIntoTestCycles(issueKey, projectId, versionId, cycleId, folderId);*/
+    }
+
+    /* To be called from Before Scenario Hook*/
+    public static void readJiraCycleMap(){
+        LOG.info("Accessing method readJiraCycleMap()");
+        if(jiraCycleMap.size()==0 && jiraEntity.getJiraUpdate().equalsIgnoreCase("true")){
+            if(jiraEntity.getJiraInputFormat().equals("JSON")){
+                String fileLocation = new File(jiraEntity.getJiraInputLocation()).getAbsoluteFile().toString();
+                String jiraMasterJson = JiraUtil.readTheFileFromAbsPath(fileLocation + "/Jira_Master_Details.json");
+                jiraCycleMap = JiraUtil.jiraJsonObjectToMap(jiraMasterJson);
+            } else if(jiraEntity.getJiraInputFormat().equals("EXCEL")){
+                jiraCycleMap = JiraUtil.moveJiraListToMap(JiraUtil.readAllLinesInDataSheet("Jira_Master_Details"));
+            }
+
+            if(!jiraEntity.getJiraProject().equals("") || !jiraEntity.getJiraCycleName().equals("") || !jiraEntity.getJiraFolderName().equals("") || !jiraEntity.getJiraVersion().equals("")){
+                jiraCycleMap = JiraUtil.updateJiraCycleMap(jiraCycleMap);
+            }
+
+            String reportPath = "";
+            if(JiraEntity.getJiraReportType().equals("ALLURE")){
+                reportPath = System.getProperty("JIRA.ALLURE_DIR");
+            } else if(JiraEntity.getJiraReportType().equals("CUCUMBER")){
+                reportPath = System.getProperty("JIRA.CUCUMBER_DIR");
+            }
+            reportPath = (JiraEntity.getJiraReportsDir() + "/" + JiraEntity.getJiraBuildNumber() + reportPath);
+            if(reportPath.startsWith("//")){
+                reportPath = "\\\\" + reportPath.substring(2);
+            }
+            JiraEntity.setJiraInputLocation(reportPath.replace("//", "/"));
+
+            LOG.info("jiraCycleMap list: " + jiraCycleMap.toString());
+            createJiraCyclesFoldersAndAddTests();
+        }
+    }
+
+    public static void createJiraCyclesFoldersAndAddTests(){
+        LinkedHashMap<String, LinkedHashMap> newCycleFoldersMap = new LinkedHashMap<>();
+        Map<String,String> updatedResult = new HashMap<>();
+        HashMap<String,ArrayList<HashMap>> cycleFoldersMap = new HashMap<>();
+
+        LOG.info("JIRA START TIME - createJiraCyclesFoldersAndAddTests: " + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
+        for (Map.Entry<String, LinkedHashMap> entry : jiraCycleMap.entrySet()) {
+            LinkedHashMap currentTestCase = entry.getValue();
+            if("Y".equals(currentTestCase.get("CREATE_CYCLE_FOLDER"))) {
+                newCycleFoldersMap.put(entry.getKey(), currentTestCase);
+            }
+        }
+
+        for (Map.Entry<String, LinkedHashMap> entry : newCycleFoldersMap.entrySet()) {
+            //new Thread("" + entry.getKey()){
+                //public void run(){
+                    String key = entry.getKey();
+                    LinkedHashMap currentTestCase = entry.getValue();
+                    String projectKey = currentTestCase.get("PROJECT_NAME").toString();
+                    String versionKey = currentTestCase.get("PROJECT_NAME").toString() + ":" + currentTestCase.get("VERSION").toString();
+                    if(!jiraversionIDMap.containsKey(versionKey)){
+                        getJiraProjectAndVersionID(currentTestCase.get("PROJECT_NAME").toString(), currentTestCase.get("VERSION").toString());
+                    }
+                    String projectId = jiraProjectIDMap.get(projectKey), versionId = jiraversionIDMap.get(versionKey), cycleId="", folderId="", executionId="";
+
+                    String createCycle = "";
+                    if("Y".equals(currentTestCase.get("CREATE_CYCLE_FOLDER")) && !currentTestCase.get("CYCLE_NAME").equals("")) {
+                        cycleId = createTestCycles(currentTestCase.get("CYCLE_NAME").toString(), projectId, versionId);
+                        if(!"".equals(currentTestCase.get("FOLDER_NAME").toString()) && !cycleId.equals("")){
+                            folderId = createNewFolderIntoTestCycles(currentTestCase.get("FOLDER_NAME").toString(), projectId, versionId, cycleId);
+                        }
+                        createCycle = "done";
+                    }
+                    currentTestCase.put("PROJECT_ID", projectId);
+                    currentTestCase.put("VERSION_ID", versionId);
+                    currentTestCase.put("CYCLE_ID", cycleId);
+                    currentTestCase.put("FOLDER_ID", folderId);
+                    currentTestCase.put("EXECUTION_ID", executionId);
+                    currentTestCase.put("CREATE_CYCLE_FOLDER", createCycle);
+                    jiraCycleMap.put(key, currentTestCase);
+                    updatedResult.put(key, "Updated");
+
+                    if(folderId.equals("")){
+                        if(cycleFoldersMap.get(cycleId)==null){
+                            ArrayList list = new ArrayList();
+                            list.add(currentTestCase);
+                            cycleFoldersMap.put(cycleId, list);
+                        }else{
+                            ArrayList list = cycleFoldersMap.get(cycleId);
+                            list.add(currentTestCase);
+                            cycleFoldersMap.put(cycleId, list);
+                        }
+
+                    }else{
+                        if(cycleFoldersMap.get(folderId)==null){
+                            ArrayList<HashMap> list = new ArrayList();
+                            list.add(currentTestCase);
+                            cycleFoldersMap.put(folderId, list);
+                        }else{
+                            ArrayList<HashMap> list = cycleFoldersMap.get(folderId);
+                            list.add(currentTestCase);
+                            cycleFoldersMap.put(folderId, list);
+                        }
+                    }
+                //}
+            //}.start();
+        }
+
+        LOG.info("JIRA CURR TIME - createJiraCyclesFoldersAndAddTests: " + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
+
+        if(cycleFoldersMap.size()!=0){
+            ExecutorService executor = Executors.newFixedThreadPool(jiraEntity.getJiraThreadsCount());
+            Collection<Callable<Void>> tasks = new ArrayList<>();
+            for (Map.Entry<String, ArrayList<HashMap>> entry : cycleFoldersMap.entrySet()) {
+                Callable<Void> task = () -> {
+                    String issueKeys = "", projectId="", versionId="", cycleId="", folderId="";
+                    ArrayList<HashMap> list = cycleFoldersMap.get(entry.getKey());
+                    Iterator iter = list.iterator();
+                    while (iter.hasNext()) {
+                        HashMap currentTestCase = (HashMap) iter.next();
+                        if(issueKeys.equals("")){
+                            issueKeys = issueKeys + currentTestCase.get("TESTCASE_KEY").toString();
+                        }else {
+                            issueKeys = issueKeys + "::" + currentTestCase.get("TESTCASE_KEY").toString();
+                        }
+                        projectId=currentTestCase.get("PROJECT_ID").toString();
+                        versionId=currentTestCase.get("VERSION_ID").toString();
+                        cycleId=currentTestCase.get("CYCLE_ID").toString();
+                        folderId=currentTestCase.get("FOLDER_ID").toString();
+                    }
+                    addTestsIntoTestCycles(issueKeys, projectId, versionId, cycleId, folderId);
+
+                    return null;
+                };
+
+                tasks.add(task);
+            }
+            try {
+                executor.invokeAll(tasks);
+            } catch(InterruptedException ex) {
+                LOG.info(ex.getLocalizedMessage());
+            }
+        }
+
+        LOG.info(cycleFoldersMap.toString());
+
+        LOG.info("JIRA END TIME - createJiraCyclesFoldersAndAddTests: " + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
+    }
+
+
+    /* To be called from After Scenario Hook*/
+    public static void prepareExecutionResults(String currentScenario, String scenarioTitle2Description, boolean isStepFailed, String failedReason){
+        LOG.info("Method: prepareExecutionResults - Accessing for test case: " + currentScenario);
+        if(executionResults==null){
+            executionResults=new CopyOnWriteArrayList<>();
+        }
+
+        if(jiraEntity.getJiraUpdate().equals("true")){
+            LinkedHashMap<String, Object> scenarioResult = new LinkedHashMap<>();
+            scenarioResult.put("Scenario", currentScenario);
+            scenarioResult.put("Description", scenarioTitle2Description);
+            scenarioResult.put("Comments", "Report Location: " + JiraEntity.getJiraInputLocation());
+            scenarioResult.put("Status", isStepFailed != false ? 2 : 1);
+            scenarioResult.put("failedCause", isStepFailed != false ? failedReason : "");
+            scenarioResult.put("executionId", getJiraCycleExecutionID(jiraCycleMap, currentScenario));
+            String name=JiraUtil.nameOfTheFile(System.getProperty("user.dir")+"/target/jira");
+            JiraUtil.serializeScenarioData(name,scenarioResult);
+        }
+    }
+
+    /* To be called from Post Run Stories*/
+    public static void updateExecutionResults(){
+
+        List<LinkedHashMap<String, Object>> executionResultsNew = JiraUtil.deserializeExecutionData();
+        LinkedHashMap<String, LinkedHashMap<String, Object>> parsedExecutionResult = JiraUtil.parseOverallStatusForScenarioOutline(executionResultsNew);
+        JiraEntity.setHeaderAo7deabf(JiraZephyrTestCaseManagement.getJiraCustomHeader("AO-7DEABF"));
+        if(jiraEntity.getJiraUpdate().equals("true")){
+            LOG.info("JIRA START TIME - updateExecutionResults: " + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
+            ExecutorService executor = Executors.newFixedThreadPool(jiraEntity.getJiraThreadsCount());
+            Collection<Callable<Void>> tasks = new ArrayList<>();   // our task do not need a returned value
+            List<HashMap<String, Object>> results = new ArrayList<>();
+
+            for (Map.Entry<String,LinkedHashMap<String, Object>> entry:parsedExecutionResult.entrySet()) {
+                LinkedHashMap<String, Object> execResult = parsedExecutionResult.get(entry.getKey());
+                Callable<Void> task = () -> {
+                    LinkedHashMap<String, Object> scenarioResult = new LinkedHashMap<>();
+                    scenarioResult = updateJiraExecutionStatus(execResult);
+                    results.add(scenarioResult);
+                    return null;
+                };
+                tasks.add(task);
+            }
+
+           /* for (int counter = 0; counter < parsedExecutionResult.size(); counter++) {
+                LinkedHashMap<String, Object> execResult = (LinkedHashMap)parsedExecutionResult.get(counter);
+                Callable<Void> task = () -> {
+                    LinkedHashMap<String, Object> scenarioResult = new LinkedHashMap<>();
+                    scenarioResult = updateJiraExecutionStatus(execResult);
+                    results.add(scenarioResult);
+                    return null;
+                };
+                tasks.add(task);
+            }*/
+
+            try {
+                executor.invokeAll(tasks);
+            } catch(InterruptedException ex) {
+                System.out.println(ex);
+            }finally {
+                executor.shutdown();
+            }
+            LOG.info(results.toString());
+            LOG.info("JIRA END TIME - updateExecutionResults: " + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
+        }
+    }
+
+    public static String getJiraCustomHeader(String headerName) {
+        LOG.info("Method: getJiraCustomHeader - Accessing method for: " + headerName);
+        String customHeader = "";
+        try {
+            if(jiraEntity.getJiraUpdate().equals("true")){
+                RestAssured.baseURI = jiraEntity.getJiraUrl();
+                RequestSpecification request = RestAssured.given();
+
+                BASE64Encoder base = new BASE64Encoder();
+                String encoding = base.encode((jiraEntity.getJiraUsername() + ":" + jiraEntity.getJiraPassword()).getBytes());
+                request.header("Authorization", "Basic " + encoding);
+
+                Response response = request.get();
+                int statusCode = response.getStatusCode();
+
+                if (statusCode >= 200 && statusCode < 300) {
+                    String[] jiraHtmlArray = response.asString().split(headerName);
+                    jiraHtmlArray = jiraHtmlArray[1].split("zEncKeyVal = \"");
+                    customHeader = jiraHtmlArray[1].substring(0, jiraHtmlArray[1].indexOf("\";"));
+                    LOG.info("Fetched the AO-7DEABF custom header value: " + customHeader);
+                } else {
+                    LOG.info("Error Response in method getJiraCustomHeader: " + statusCode);
+                }
+            }
+        } catch (Exception e) {
+            LOG.info("Method: getJiraCustomHeader - Error in method getJiraCustomHeader: " + e.getMessage(), e);
+        }
+        LOG.info("Method: getJiraCustomHeader - Jira custom header value: " + customHeader);
+        return customHeader;
+    }
+
+    public static String getJiraCycleExecutionID(LinkedHashMap<String, LinkedHashMap> jiraCycleMap, String testcaseName) {
+        LOG.info("Method: getJiraCycleExecutionID - Accessing method for test case: " + testcaseName);
+        String executionId = "";
+        try {
+            RestAssured.baseURI = jiraEntity.getJiraUrl() + "rest/zephyr/latest/zql/executeSearch";
+            RequestSpecification request = RestAssured.given();
+
+            BASE64Encoder base = new BASE64Encoder();
+            String encoding = base.encode((jiraEntity.getJiraUsername() + ":" + jiraEntity.getJiraPassword()).getBytes());
+            request.header("Authorization", "Basic " + encoding);
+            request.header("Content-Type", "application/json");
+            request.header("X-Requested-With", "XMLHttpRequest");
+            request.header("ao-7deabf", jiraEntity.getHeaderAo7deabf());
+
+            String query = generateZQLQueryParam(jiraCycleMap, testcaseName);
+            request.queryParam("zqlQuery", query);
+
+            Response response = request.get();
+            int statusCode = response.getStatusCode();
+
+            if (statusCode >= 200 && statusCode < 300) {
+                ArrayList<LinkedHashMap> executionsList = response.jsonPath().get("executions");
+                if(executionsList.size()!=0)
+                    executionId = executionsList.get(0).get("id").toString();
+            } else {
+                LOG.info("Method: getJiraCycleExecutionID - Error Response in method getJiraCycleExecutionID: " + statusCode + " error: " + response.jsonPath().get().toString());
+            }
+
+        } catch (Exception e) {
+            LOG.info("Method: getJiraCycleExecutionID - Error in method getJiraCycleExecutionID: " + e.getStackTrace());
+        }
+        LOG.info("Method: getJiraCycleExecutionID - Jira Cycle Execution id for test case: " + testcaseName +" = " + executionId);
+        return executionId;
+    }
+
+    private static String generateZQLQueryParam(LinkedHashMap<String, LinkedHashMap> jiraCycleMap, String testcaseName){
+        String query = "";
+
+        LinkedHashMap currentTestCase = jiraCycleMap.get(testcaseName);
+
+        query = "project = \"" + currentTestCase.get("PROJECT_NAME") + "\" AND cycleName in (\"" + currentTestCase.get("CYCLE_NAME") + "\") AND folderName = \"" + currentTestCase.get("FOLDER_NAME") + "\" AND fixVersion = \"" + currentTestCase.get("VERSION") + "\" AND issue = \"" + currentTestCase.get("TESTCASE_KEY") + "\" AND summary ~ \"" + testcaseName + "\"";
+        query = query.replaceAll("= \"\"", "is null");
+
+        return query;
+    }
+
+    public static void getJiraProjectAndVersionID(String projectKey, String versionKey) {
+        LOG.info("Method: getJiraProjectAndVersionID - Accessing method for Project Key: " + projectKey + " Version Key: " + versionKey);
+        String projectId = "", versionId = "";
+        try {
+            RestAssured.baseURI = jiraEntity.getJiraUrl() + "rest/zephyr/latest/zql/executeSearch";
+            RequestSpecification request = RestAssured.given();
+
+            BASE64Encoder base = new BASE64Encoder();
+            String encoding = base.encode((jiraEntity.getJiraUsername() + ":" + jiraEntity.getJiraPassword()).getBytes());
+            request.header("Authorization", "Basic " + encoding);
+            request.header("Content-Type", "application/json");
+            request.header("X-Requested-With", "XMLHttpRequest");
+            request.header("ao-7deabf", jiraEntity.getHeaderAo7deabf());
+
+            String query = "project = \"" + projectKey + "\" AND fixVersion = \"" + versionKey + "\"";
+            request.queryParam("zqlQuery", query);
+
+            Response response = request.get();
+            int statusCode = response.getStatusCode();
+
+            if (statusCode >= 200 && statusCode < 300) {
+                ArrayList<LinkedHashMap> executionsList = response.jsonPath().get("executions");
+                if(executionsList.size()!=0) {
+                    projectId = executionsList.get(0).get("projectId").toString();
+                    versionId = executionsList.get(0).get("versionId").toString();
+                    jiraProjectIDMap.put(projectKey, projectId);
+                    jiraversionIDMap.put(projectKey + ":" + versionKey, versionId);
+                    //LOG.info("Fetched Jira ProjectID And VersionID details Successfully");
+                } else {
+                    jiraProjectIDMap.put(projectKey, "");
+                    jiraversionIDMap.put(projectKey + ":" + versionKey, "");
+                    LOG.info("Method: getJiraProjectAndVersionID - Project Id and Version Id not found for Project: " + projectKey + " & Version: " + versionKey);
+                }
+            } else {
+                LOG.info("Method: getJiraProjectAndVersionID - Error Response in method: " + statusCode + " error: " + response.jsonPath().get().toString());
+            }
+        } catch (Exception e) {
+            LOG.info("Method: getJiraProjectAndVersionID - Error in method: " + e.getStackTrace());
+        }
+        LOG.info("Method: getJiraProjectAndVersionID - Jira Project Id: " + projectId +" and " + versionId);
+    }
+
+    public static LinkedHashMap<String, Object> updateJiraExecutionStatus(LinkedHashMap<String, Object> scenarioResult) {
+        LOG.info("Method: updateJiraExecutionStatus - Accessing method");
+        String updateStatus = "";
+        try {
+            RestAssured.baseURI = jiraEntity.getJiraUrl() + "/rest/zapi/latest/execution/";
+            RequestSpecification request = RestAssured.given();
+
+            BASE64Encoder base = new BASE64Encoder();
+            String encoding = base.encode((jiraEntity.getJiraUsername() + ":" + jiraEntity.getJiraPassword()).getBytes());
+            request.header("Authorization", "Basic " + encoding);
+            request.header("Content-Type", "application/json");
+            request.header("X-Requested-With", "XMLHttpRequest");
+
+            JSONObject requestParams = new JSONObject();
+            requestParams.put("status", scenarioResult.get("Status"));
+
+            String comment = scenarioResult.get("Comments").toString();
+            if (Integer.parseInt(scenarioResult.get("Status").toString()) == 2) {
+                comment = comment + "\n" + "Failed Reason: " + scenarioResult.get("failedCause");
+            }
+            requestParams.put("comment", comment);
+            request.body(requestParams.toString());
+            Response response = request.put(scenarioResult.get("executionId") + "/execute");
+
+            int statusCode = response.getStatusCode();
+
+            if (statusCode >= 200 && statusCode < 300) {
+                updateStatus = "Success: " + statusCode;
+            } else {
+                updateStatus = "Error Response: " + statusCode;
+            }
+        } catch (Exception e) {
+            updateStatus = "Error Response: " + e.getMessage();
+        }
+        scenarioResult.put("JiraUpdateStatus", updateStatus);
+        LOG.info("Method: updateJiraExecutionStatus - Jira update status for execution id: " + scenarioResult.get("executionId") + " = " + updateStatus);
+
+        return scenarioResult;
+    }
+
+    public static String checkJiraCycleExists(String projectId, String versionId, String checkCycleName) {
+        LOG.info("Method: checkJiraCycleExists - Accessing method for Cycle Name: " + checkCycleName);
+        String cycleId = "";
+        try {
+            RestAssured.baseURI = jiraEntity.getJiraUrl() + "rest/zapi/latest/cycle?";
+            RequestSpecification request = RestAssured.given();
+
+            BASE64Encoder base = new BASE64Encoder();
+            String encoding = base.encode((jiraEntity.getJiraUsername() + ":" + jiraEntity.getJiraPassword()).getBytes());
+            request.header("Authorization", "Basic " + encoding);
+            request.header("Content-Type", "application/json");
+            request.header("X-Requested-With", "XMLHttpRequest");
+            request.header("ao-7deabf", jiraEntity.getHeaderAo7deabf());
+
+            request.param("projectId", projectId);
+            request.param("versionId", versionId);
+
+            Response response = request.get();
+            int statusCode = response.getStatusCode();
+
+            if (statusCode >= 200 && statusCode < 300) {
+                LinkedHashMap<String, Object> responseMap = response.jsonPath().get();
+                for (Map.Entry entry : responseMap.entrySet()) {
+                    String key = entry.getKey().toString();
+                    Object value = entry.getValue();
+                    if(!key.equals ("recordsCount") && ((LinkedHashMap) entry.getValue()).containsKey("name")){
+                        if(checkCycleName.equals(((LinkedHashMap) entry.getValue()).get("name").toString())){
+                            cycleId = key;
+                            LOG.info("Method: checkJiraCycleExists - Cycle Value of "+((LinkedHashMap) entry.getValue()).get("name").toString()+" is: "+ key);
+                            break;
+                        }
+                    }
+                }
+            } else {
+                LOG.info("Method: checkJiraCycleExists - Error Response in method getAllJiraCycles: " + statusCode);
+            }
+        } catch (Exception e) {
+            LOG.info("Method: checkJiraCycleExists - Error in method getAllJiraCycles: " + e.getStackTrace());
+        }
+
+        return cycleId;
+    }
+
+    public static String createTestCycles(String cycleName, String projectId, String versionId) {
+        LOG.info("Method: createTestCycles - Accessing method for Cycle Name: " + cycleName);
+        String cycleId = "";
+        try {
+            if(cyclePresenceMap.containsKey(cycleName)){
+                cycleId = cyclePresenceMap.get(cycleName);
+            }else{
+                cycleId = checkJiraCycleExists(projectId, versionId, cycleName);
+                cyclePresenceMap.put(cycleName, cycleId);
+            }
+
+            if(cycleId.equals("")){
+                RestAssured.baseURI = jiraEntity.getJiraUrl() + "rest/zapi/latest/cycle";
+                RequestSpecification request = RestAssured.given();
+
+                BASE64Encoder base = new BASE64Encoder();
+                String encoding = base.encode((jiraEntity.getJiraUsername() + ":" + jiraEntity.getJiraPassword()).getBytes());
+                request.header("Authorization", "Basic " + encoding);
+                request.header("Content-Type", "application/json");
+
+                JSONObject requestParams = new JSONObject();
+                requestParams.put("name", cycleName);
+                requestParams.put("description", "New Cycle created using automation script");
+                requestParams.put("projectId", projectId);
+                requestParams.put("versionId", versionId);
+                requestParams.put("sprintId", 1);
+                String dateString = new SimpleDateFormat("d/MMM/yy").format(new Date());
+                requestParams.put("startDate", dateString);
+                requestParams.put("endDate", dateString);
+                requestParams.put("build", "");
+                requestParams.put("environment", "");
+                requestParams.put("clonedCycleId", "");
+
+                request.body(requestParams.toString());
+                Response response = request.post();
+
+                int statusCode = response.getStatusCode();
+
+                if (statusCode >= 200 && statusCode < 300) {
+                    LinkedHashMap executionsList = response.jsonPath().get();
+                    cycleId = executionsList.get("id").toString();
+                    cyclePresenceMap.put(cycleName, cycleId);
+                    LOG.info("Method: createTestCycles - Success: " + statusCode + " cycleId: " + cycleId);
+                } else {
+                    LOG.info("Method: createTestCycles - Error Response: " + statusCode);
+                }
+            } else {
+                LOG.info("Method: createTestCycles - Cycle " + cycleName + " Exists cycleId: " + cycleId);
+            }
+        } catch (Exception e) {
+            LOG.info("Method: createTestCycles - Error Response: " + e.getMessage());
+        }
+
+        return cycleId;
+    }
+
+    public static String checkJiraCycleFolderExists(String projectId, String versionId, String cycleId, String checkFolderName) {
+        LOG.info("Method: checkJiraCycleFolderExists - Accessing method for folder name: " + checkFolderName);
+        String folderId = "";
+        try {
+            RestAssured.baseURI = jiraEntity.getJiraUrl() + "rest/zapi/latest/cycle/" + cycleId + "/folders?";
+            RequestSpecification request = RestAssured.given();
+
+            BASE64Encoder base = new BASE64Encoder();
+            String encoding = base.encode((jiraEntity.getJiraUsername() + ":" + jiraEntity.getJiraPassword()).getBytes());
+            request.header("Authorization", "Basic " + encoding);
+            request.header("Content-Type", "application/json");
+            request.header("X-Requested-With", "XMLHttpRequest");
+            request.header("ao-7deabf", jiraEntity.getHeaderAo7deabf());
+
+            request.param("projectId", projectId);
+            request.param("versionId", versionId);
+            request.param("cycleId", cycleId);
+
+            Response response = request.get();
+            int statusCode = response.getStatusCode();
+
+            if (statusCode >= 200 && statusCode < 300) {
+                ArrayList<LinkedHashMap<String, Object>> responsArrayList = response.jsonPath().get();
+                for(int i=0; i<responsArrayList.size();i++){
+                    LinkedHashMap<String, Object> map = responsArrayList.get(i);
+                    if(map.containsKey("folderName") && map.get("folderName").equals(checkFolderName)){
+                        folderId = map.get("folderId").toString();
+                        LOG.info("Method: checkJiraCycleFolderExists - Folder Id for the folderName of "+map.get("folderName")+" is: "+ map.get("folderId").toString());
+                        break;
+                    }
+                }
+            } else {
+                LOG.info("Method: checkJiraCycleFolderExists - Error Response in method: " + statusCode);
+            }
+
+        } catch (Exception e) {
+            LOG.info("Method: checkJiraCycleFolderExists - Error in method: " + e.getStackTrace());
+        }
+
+        return folderId;
+    }
+
+    public static String createNewFolderIntoTestCycles(String folderName, String projectId, String versionId, String cycleId) {
+        LOG.info("Method: createNewFolderIntoTestCycles - Accessing method for folder name: " + folderName);
+        String folderId = "";
+        try {
+            if(folderPresenceMap.containsKey(cycleId+":"+folderName)){
+                folderId = folderPresenceMap.get(cycleId+":"+folderName);
+            }else {
+                folderId = checkJiraCycleFolderExists(projectId, versionId, cycleId, folderName);
+                folderPresenceMap.put(cycleId+":"+folderName, folderId);
+            }
+
+            if(folderId.equals("")){
+                RestAssured.baseURI = jiraEntity.getJiraUrl() + "rest/zapi/latest";
+                RequestSpecification request = RestAssured.given();
+
+                BASE64Encoder base = new BASE64Encoder();
+                String encoding = base.encode((jiraEntity.getJiraUsername() + ":" + jiraEntity.getJiraPassword()).getBytes());
+                request.header("Authorization", "Basic " + encoding);
+                request.header("Content-Type", "application/json");
+
+                JSONObject requestParams = new JSONObject();
+                requestParams.put("name", folderName);
+                requestParams.put("description", "New Folder created using automation script");
+                requestParams.put("projectId", projectId);
+                requestParams.put("versionId", versionId);
+                requestParams.put("cycleId", cycleId);
+
+                request.body(requestParams.toString());
+                Response response = request.post("/folder/create");
+
+                int statusCode = response.getStatusCode();
+
+                if (statusCode >= 200 && statusCode < 300) {
+                    LinkedHashMap executionsList = response.jsonPath().get();
+                    folderId = executionsList.get("id").toString();
+                    folderPresenceMap.put(cycleId+":"+folderName, folderId);
+                    LOG.info("Method: createNewFolderIntoTestCycles - Success: " + statusCode + " folderId: " + folderId);
+                } else {
+                    LOG.info("Method: createNewFolderIntoTestCycles - Error Response: " + statusCode);
+                }
+            }else{
+                LOG.info("Method: createNewFolderIntoTestCycles - Folder "+ folderName +" Exists folderId: " + folderId);
+            }
+        } catch (Exception e) {
+            LOG.info("Method: createNewFolderIntoTestCycles - Error Response: " + e.getMessage());
+        }
+
+        return folderId;
+    }
+
+    public static String addTestsIntoTestCycles(String issueKey, String projectId, String versionId, String cycleId, String folderId) {
+        LOG.info("Method: addTestsIntoTestCycles - Accessing method for testcase name: " + issueKey);
+        String execId = "";
+        try {
+                RestAssured.baseURI = jiraEntity.getJiraUrl() + "rest/zapi/latest";
+                RequestSpecification request = RestAssured.given();
+
+                BASE64Encoder base = new BASE64Encoder();
+                String encoding = base.encode((jiraEntity.getJiraUsername() + ":" + jiraEntity.getJiraPassword()).getBytes());
+                request.header("Authorization", "Basic " + encoding);
+                request.header("Content-Type", "application/json");
+
+                JSONArray issueList = new JSONArray();
+                String[] keyList = issueKey.split("::");
+                for(String key : keyList){
+                    issueList.put(key);
+                }
+
+                JSONObject requestParams = new JSONObject();
+                requestParams.put("issues", issueList);
+                requestParams.put("assigneeType", "currentUser");
+                requestParams.put("method", "1");
+                requestParams.put("projectId", projectId);
+                requestParams.put("versionId", versionId);
+                requestParams.put("cycleId", cycleId);
+                if(!folderId.equals("")){
+                    requestParams.put("folderId", folderId);
+                }
+
+                request.body(requestParams.toString());
+                Response response = request.post("/execution/addTestsToCycle");
+
+                int statusCode = response.getStatusCode();
+
+                if (statusCode >= 200 && statusCode < 300) {
+                    LinkedHashMap executionsList = response.jsonPath().get();
+                    LOG.info("Method: addTestsIntoTestCycles - Success: " + statusCode + " & Progress token: " + executionsList);
+                } else {
+                    LOG.info("Method: addTestsIntoTestCycles - Error Response: " + statusCode);
+                }
+        } catch (Exception e) {
+            LOG.info("Method: addTestsIntoTestCycles - Error Response: " + e.getMessage());
+        }
+
+        return execId;
+    }
+
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Hooks
+
+ setJiraEntity();
+ readJiraCycleMap();
+ 
+ before driver creation
+ 
+ after 
+ prepareExecutionResults(testscenario.getName(), "", !testscenario.getStatus().equals(Status.PASSED),logError(testscenario));
+
+private static void setJiraEntity(){
+        JiraEntity.setJiraUrl(System.getProperty("JIRA_URL"));
+        JiraEntity.setJiraUpdate(System.getProperty("JIRA.UPDATE"));
+        JiraEntity.setJiraUsername(System.getProperty("JIRA_USERNAME"));
+        JiraEntity.setJiraPassword(System.getProperty("JIRA_PASSWORD"));
+        JiraEntity.setJiraInputFormat(System.getProperty("JIRA.INPUT_FORMAT"));
+        JiraEntity.setJiraInputLocation(System.getProperty("JIRA.INPUT_LOCATION"));
+        JiraEntity.setHeaderAo7deabf(JiraZephyrTestCaseManagement.getJiraCustomHeader("AO-7DEABF"));
+        JiraEntity.setJiraProject(System.getProperty("JIRA.PROJECT_NAME"));
+        JiraEntity.setJiraCycleName(System.getProperty("JIRA.CYCLE_NAME"));
+        JiraEntity.setJiraFolderName(System.getProperty("JIRA.FOLDER_NAME"));
+        JiraEntity.setJiraVersion(System.getProperty("JIRA.VERSION"));
+        JiraEntity.setJiraReportType(System.getProperty("JIRA.REPORT_TYPE"));
+        JiraEntity.setJiraReportsDir(System.getProperty("JIRA.REPORTS_DIR"));
+        JiraEntity.setJiraBuildNumber(System.getProperty("JIRA.BUILD_NUMBER"));
+        JiraEntity.setJiraThreadsCount(Integer.parseInt(System.getProperty("JIRA.THREADS_COUNT", "1")));
+    }
+
+    private String logError(Scenario scenario) {
+        String errorMessage = null;
+        try {
+            Class clasz = ClassUtils.getClass("cucumber.runtime.java.JavaHookDefinition$ScenarioAdaptor");
+            Field fieldScenario = FieldUtils.getField(clasz, "scenario", true);
+            fieldScenario.setAccessible(true);
+            Object objectScenario =  fieldScenario.get(scenario);
+
+            Field fieldStepResults = objectScenario.getClass().getDeclaredField("stepResults");
+            fieldStepResults.setAccessible(true);
+
+            ArrayList<Result> results = (ArrayList<Result>) fieldStepResults.get(objectScenario);
+            for (Result result : results) {
+                if (result.getError() != null) {
+                    errorMessage = result.getError().toString();
+                    System.out.println("Error in Scenario"+errorMessage);
+                    logman.info(" Error in Scenario, Error = "+errorMessage );
+                    break;
+                }
+            }
+        } catch (Throwable e) {
+            logman.error("Error while logging Scenario error",e);
+        }
+        return errorMessage;
+    }
+
+	
+	&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+	postrun
+	afetr copy target
+	updateExecutionResults();
+	
+	&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+	{
+  "Jira": [
+    {
+      "TESTCASE_NAME": "IT1_SIT_IN_Pacs.008_MT103_TS01_TC01",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle X",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-16",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT2_SIT_IN_Camt.056_MT192_TS01_TC01",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle X",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-17",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT2_SIT_OUT_Camt.029_MT196_TS01_TC01",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-18",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_OUT_Pacs.008_MT103_TS01_TC11",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-19",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT2_SIT_IN_Pacs.004_MT202RET_TS01_TC02",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-20",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_IN_Pacs.009_MT202_TS01_TC02",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-21",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_IN_Pacs.009_MT202_TS01_TC04",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-22",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_OUT_Pacs.004_MT202RET_TS01_TC02",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-23",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_IN_Pacs.008_MT103_TS01_TC13",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-24",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_OUT_Pacs.004_MT202RET_TS01_TC03",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 1",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-25",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_IN_Pacs.009Cov_MT202Cov_TS01_TC03",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 2",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-26",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_OUT_MT202COV_Pacs.009Cov_TS01_TC02",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 2",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-27",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_OUT_Pacs.009_MT202_TS01_TC03",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 2",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-28",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "IT1_SIT_OUT_Pacs.009_MT202_TS01_TC07",
+      "PROJECT_NAME": "TASFE",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Build 2",
+      "VERSION": "POC for updating Jira",
+      "TESTCASE_KEY": "TASFE-29",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "Jira Update Test 1",
+      "PROJECT_NAME": "T2CS",
+      "CYCLE_NAME": "Jira Integration Test Cycle 1",
+      "FOLDER_NAME": "Folder 1",
+      "VERSION": "ADMI007",
+      "TESTCASE_KEY": "T2CS-5609",
+      "CREATE_CYCLE_FOLDER": "N"
+    },
+    {
+      "TESTCASE_NAME": "Jira Update Test 2",
+      "PROJECT_NAME": "T2CS",
+      "CYCLE_NAME": "Jira Integration Test Cycle 2",
+      "FOLDER_NAME": "",
+      "VERSION": "ADMI007",
+      "TESTCASE_KEY": "T2CS-5610",
+      "CREATE_CYCLE_FOLDER": "N"
+    }
+  ]
+}
+	
